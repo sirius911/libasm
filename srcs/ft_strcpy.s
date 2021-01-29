@@ -13,7 +13,7 @@
 ;	C Function prototype: char		*ft_strcpy(char *dest, const char *src)
 ;	input		:	rdi = *dest		rsi = *src	
 ;	output		: 	rax						
-;	used registers	:	rdx rcx
+;	used registers	:	rax rdx rcx
 ;
 ; **************************************************************************** #
 

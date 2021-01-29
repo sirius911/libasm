@@ -29,7 +29,7 @@ int		main(void)
     char p1[] = "abcabc";
     char p2[] = "abcdefg";
     char p3[] = "";
-	//char p4[] = "ab\xff";
+	char p4[] = "ab\xff";
 	char p5[] = "abcdefg";
     int i = 100;
     char buff[i];
@@ -54,5 +54,11 @@ int		main(void)
     printf("Lib C : (%s, %s) |%s|\n", p3, p3, strcpy(p3, p3));
     printf("My res: (%s, %s) |%s|\n", p2, p2 + 3, ft_strcpy(p2, p2 + 3));
 	printf("Lib C : (%s, %s) |%s|\n", p5, p5 + 3, strcpy(p5, p5 + 3));
+
+	printf("\n\n### STRCMP ###\n\n");
+
+    printf("My res: |%d|%d|%d|%d|%d|%d|%d|\n", ft_strcmp(p0, p1), ft_strcmp(p0, p0), ft_strcmp(p1, p0), ft_strcmp(p0, p3), ft_strcmp(p3, p3), ft_strcmp(p4, p0), ft_strcmp(p3, p2));
+    printf("Lib C : |%d|%d|%d|%d|%d|%d|%d|\n", strcmp(p0, p1), strcmp(p0, p0), strcmp(p1, p0), strcmp(p0, p3), strcmp(p3, p3), strcmp(p4, p0), strcmp(p3, p2));
+
 	return (0);
 }
