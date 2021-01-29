@@ -2,7 +2,7 @@ NAME			= libasm.a
 
 HEADER			= libasm.h
 
-SRCS 			= srcs/ft_strlen.s
+SRCS 			= srcs/ft_strlen.s srcs/ft_strcpy.s
 
 OBJS 			= $(SRCS:.s=.o)
 
