@@ -60,5 +60,28 @@ int		main(void)
     printf("My res: |%d|%d|%d|%d|%d|%d|%d|\n", ft_strcmp(p0, p1), ft_strcmp(p0, p0), ft_strcmp(p1, p0), ft_strcmp(p0, p3), ft_strcmp(p3, p3), ft_strcmp(p4, p0), ft_strcmp(p3, p2));
     printf("Lib C : |%d|%d|%d|%d|%d|%d|%d|\n", strcmp(p0, p1), strcmp(p0, p0), strcmp(p1, p0), strcmp(p0, p3), strcmp(p3, p3), strcmp(p4, p0), strcmp(p3, p2));
 
+	printf("\n\n** STRDUP **\n\n");
+
+    char dup0[] = "bonjour les amis.";
+    char dup1[] = "Le langage assembleur, souvent appellé asm, est un langage de bas niveau pour ordinateur - ou autre machine programmable - qui possède une très forte correspondance\nentre le langage et l’architecture de la machine.\n";
+    char dup2[] = "Bla bla \0bla... \n vous nous fatiguez";
+    char dup3[] = "";
+
+    char *s = ft_strdup(dup0);
+    printf("My dup: %s\n", s);
+    free(s);
+    s = ft_strdup(dup1);
+    printf("My dup: %s\n", s);
+    free(s);
+    s = ft_strdup(dup2);
+    printf("My dup: %s\n", s);
+    free(s);
+    s = strdup(dup2);
+    printf("Lib C : %s\n", s);
+    free(s);
+    s = ft_strdup(dup3);
+    printf("My dup: <%s>\n", s);
+    free(s);
+
 	return (0);
 }

@@ -11,7 +11,7 @@
 ;	---------------------------------------------------------------------------#
 ;
 ;	C Function prototype: int	ft_strcmp(const char *s1, const char *s2)
-;	input		:	rdi = *s11		rsi = *s2	
+;	input		:	rdi = *s1		rsi = *s2	
 ;	output		: 	rax						
 ;	used registers	:	rax rdx rcx
 ;
