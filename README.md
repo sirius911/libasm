@@ -14,13 +14,9 @@ machine symbolique.
 
 | Nom du programme  	| libasm.a   	|
 |---	|---	|
-| Fichiers de rendu  	| main.c, libasm.h, Makefile  	|
+| Fichiers de rendu  	| *.s, main.c, libasm.h, Makefile  	|
 
 # Part 1 : Fonctions obligatoires
-
-### Fonctions autorisées
-
-malloc
 
 - [x] ft_strlen
 - [x] ft_strcpy
@@ -28,6 +24,8 @@ malloc
 - [ ] ft_write
 - [ ] ft_read
 - [x] ft_strdup
+
+Fonctions autorisées : malloc
 
 # Partie Bonus
 
