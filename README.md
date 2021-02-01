@@ -38,8 +38,8 @@ Fonctions autorisées : malloc
 `} t_list;`
 
 - [ ] ft_atoi_base
-- [ ] ft_list_push_front
-- [ ] ft_list_size
+- [x] ft_list_push_front
+- [x] ft_list_size
 - [ ] ft_list_sort
 - [ ] ft_list_remove_if
 

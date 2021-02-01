@@ -209,5 +209,40 @@ int		main(void)
     printf("Unistd: |%zd|\n", write(1, buff, -122));
     printf("Errno: %d\n", errno);
     perror("Error in read:");
-	return (0);
+
+
+	printf("\n****** BONUS ******\n");
+    t_list  elem1;
+    t_list  elem2;
+
+    elem1.data = "Julia";
+    elem2.data = "Manon";
+    elem1.next = &elem2;
+    elem2.next = NULL;
+    t_list  *beg_list = &elem1;
+    //char    *str1 = "8ijkl5";
+    //char    *str2 = "8g";
+    char    *str_mal1 = (char *)malloc(3);
+    str_mal1[0] = '8';
+    str_mal1[1] = 'g';
+    str_mal1[2] = 0;
+
+    char    *str_mal2 = (char *)malloc(3);
+    str_mal2[0] = '8';
+    str_mal2[1] = 'g';
+    str_mal2[2] = 0;
+
+    printf("Before push: |%s|%p|%p|\n", beg_list->data, beg_list, beg_list->next);
+    ft_list_push_front(&beg_list, str_mal1);
+    ft_list_push_front(&beg_list, str_mal2);
+
+    printf("Elem1: |%s|%p|\n", beg_list->data, beg_list->next);
+    printf("Elem2: |%s|%p|\n", beg_list->next->data, beg_list->next->next);
+    printf("Elem3: |%s|%p|\n", beg_list->next->next->data, beg_list->next->next->next);
+    printf("Elem4: |%s|%p|\n", beg_list->next->next->next->data, beg_list->next->next->next->next);
+
+    printf("\n\nLIST SIZE\n\n");
+    printf("List size: |%d|%d|%d|%d|\n", ft_list_size(beg_list), ft_list_size(beg_list->next), ft_list_size(beg_list->next->next), ft_list_size(NULL));
+
+    return (0);
 }
