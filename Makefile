@@ -2,7 +2,8 @@ NAME			= libasm.a
 
 HEADER			= libasm.h
 
-SRCS 			= srcs/ft_strlen.s srcs/ft_strcpy.s srcs/ft_strcmp.s srcs/ft_strdup.s
+SRCS 			= srcs/ft_strlen.s srcs/ft_strcpy.s srcs/ft_strcmp.s srcs/ft_strdup.s \
+				  srcs/ft_read.s
 
 OBJS 			= $(SRCS:.s=.o)
 
@@ -26,7 +27,7 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS) $(HEADER)
 
 test: main.c $(NAME)
-	$(CC) $(FLAGS) main.c -o test -L. -lasm
+	$(CC) $(FLAGS) main.c -o test -L. -lasm -I libasm.h
 	@echo "création de Cub3D : \033[32mok\033[0m"
 
 clean:

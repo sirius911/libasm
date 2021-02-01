@@ -13,6 +13,9 @@
 #include "libasm.h"
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 void		clear_buf(char *buf, int size)
 {
@@ -82,6 +85,91 @@ int		main(void)
     s = ft_strdup(dup3);
     printf("My dup: <%s>\n", s);
     free(s);
+
+    printf("\n\n### READ ###\n\n");
+
+    clear_buf(buff, i);
+    int fd1 = open("test.txt", O_RDWR);
+    printf("My read: |%zd|\n", ft_read(-1, buff, 10));
+    printf("My read: |%s|\n", buff);
+	clear_buf(buff, i);
+    printf("My read: |%zd|\n", ft_read(fd1, buff, 20));
+    printf("My read: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("My read: |%zd|\n", ft_read(fd1, buff, 30));
+    printf("My read: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("My read: |%zd|\n", ft_read(fd1, buff, 40));
+    printf("My read: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("My read: |%zd|\n", ft_read(fd1, buff, 50));
+    printf("My read: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("My read: |%zd|\n", ft_read(fd1, buff, 0));
+    printf("My read: |%s|\n", buff);
+    close(fd1);
+
+    fd1 = open("read_test.txt", O_RDWR);
+    printf("Lib C: |%zd|\n", read(fd1, buff, 10));
+    printf("Lib C: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("Lib C: |%zd|\n", read(fd1, buff, 20));
+    printf("Lib C: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("Lib C: |%zd|\n", read(fd1, buff, 30));
+    printf("Lib C: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("Lib C: |%zd|\n", read(fd1, buff, 40));
+    printf("Lib C: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("Lib C: |%zd|\n", read(fd1, buff, 50));
+    printf("Lib C: |%s|\n", buff);
+    clear_buf(buff, i);
+    printf("Lib C: |%zd|\n", read(fd1, buff, 0));
+    printf("Lib C: |%s|\n", buff);
+    close(fd1);
+
+
+    printf("\n** READ STDIN **\n\n");
+
+    clear_buf(buff, i);
+    printf("My read: %zd\n", ft_read(0, buff, 10));
+    printf("My read: %s\n", buff);
+    clear_buf(buff, i);
+    printf("C read : %zd\n", read(0, buff, 10));
+    printf("C read : %s\n", buff);
+
+    printf("\n** READ ERROR **\n\n");
+    clear_buf(buff, i);
+    fd1 = open("test.txt", O_RDWR);
+    printf("My read: |%zd|\n", ft_read(-5, buff, 10));
+    printf("My read: |%s|\n", buff);
+    printf("Errno: %d\n", errno);
+    perror("ft_read(-5, buff, 10) => Error in read:");
+
+    printf("My read: |%zd|\n", ft_read(fd1, buff, -10));
+    printf("My read: |%s|\n", buff);
+    printf("Errno: %d\n", errno);
+    perror("ft_read(fd1, buff, -10) => Error in read:");
+
+    printf("My read: |%zd|\n", ft_read(fd1, NULL, 10));
+    printf("My read: |%s|\n", buff);
+    printf("Errno: %d\n", errno);
+    perror("ft_read(fd1, NULL, 10) => Error in read:");
+
+    printf("C read: |%zd|\n", read(-5, buff, 10));
+    printf("C Char read: |%s|\n", buff);
+    printf("Errno: %d\n", errno);
+    perror("read(-5, buff, 10) => Error in read:");
+    printf("C read: |%zd|\n", read(fd1, buff, -10));
+    printf("C Char read: |%s|\n", buff);
+    printf("Errno: %d\n", errno);
+    perror("read(fd1, buff, -10) => Error in read:");
+    printf("C read: |%zd|\n", read(fd1, NULL, 10));
+    printf("C Char read: |%s|\n", buff);
+    printf("Errno: %d\n", errno);
+    perror("read(fd1, NULL, 10) => Error in read:");
+    close(fd1);
 
 	return (0);
 }
