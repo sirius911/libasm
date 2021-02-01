@@ -171,5 +171,43 @@ int		main(void)
     perror("read(fd1, NULL, 10) => Error in read:");
     close(fd1);
 
+    printf("\n\n### WRITE ###\n\n");
+
+    printf("My write: |%zd|\n", ft_write(1, "Oh chilele\n", 11));
+    printf("My write: |%zd|\n", ft_write(1, "\n", 2));
+    printf("My write: |%zd|\n", ft_write(1, "Bombo\n", 0));
+    printf("My write: |%zd|\n", ft_write(1, "", 2));
+    printf("My write: |%zd|\n", ft_write(1, "test", 4));
+    printf("My write: |%zd|\n", ft_write(1, "test", 2));
+    printf("My write: |%zd|\n", ft_write(1, NULL, 2));
+    printf("**\n");
+    printf("Unistd: |%zd|\n", write(1, "Oh chilele\n", 11));
+    printf("Unistd: |%zd|\n", write(1, "\n", 2));
+    printf("Unistd: |%zd|\n", write(1, "Bombo\n", 0));
+    printf("Unistd: |%zd|\n", write(1, "", 2));
+    printf("Unistd: |%zd|\n", write(1, "test", 4));
+    printf("Unistd: |%zd|\n", write(1, "test", 2));
+    printf("Unistd: |%zd|\n", write(1, NULL, 2));
+
+    printf("\n** WRITE ERROR **\n\n");
+    printf("My res: |%zd|\n", ft_write(1, NULL, 2));
+    printf("Errno: %d\n", errno);
+    perror("Error in read:");
+    printf("My res: |%zd|\n", ft_write(-1, buff, 2));
+    printf("Errno: %d\n", errno);
+    perror("Error in read:");
+    printf("My res: |%zd|\n", ft_write(1, buff, -122));
+    printf("Errno: %d\n", errno);
+    perror("Error in read:");
+
+    printf("Unistd: |%zd|\n", write(1, NULL, 2));
+    printf("Errno: %d\n", errno);
+    perror("Error in read:");
+    printf("Unistd: |%zd|\n", write(-1, buff, 2));
+    printf("Errno: %d\n", errno);
+    perror("Error in read:");
+    printf("Unistd: |%zd|\n", write(1, buff, -122));
+    printf("Errno: %d\n", errno);
+    perror("Error in read:");
 	return (0);
 }

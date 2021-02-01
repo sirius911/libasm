@@ -21,8 +21,8 @@ machine symbolique.
 - [x] ft_strlen
 - [x] ft_strcpy
 - [x] ft_strcmp
-- [ ] ft_write
-- [ ] ft_read
+- [x] ft_write
+- [x] ft_read
 - [x] ft_strdup
 
 Fonctions autorisées : malloc
