@@ -63,6 +63,8 @@ int		main(void)
     printf("My res: |%d|%d|%d|%d|%d|%d|%d|\n", ft_strcmp(p0, p1), ft_strcmp(p0, p0), ft_strcmp(p1, p0), ft_strcmp(p0, p3), ft_strcmp(p3, p3), ft_strcmp(p4, p0), ft_strcmp(p3, p2));
     printf("Lib C : |%d|%d|%d|%d|%d|%d|%d|\n", strcmp(p0, p1), strcmp(p0, p0), strcmp(p1, p0), strcmp(p0, p3), strcmp(p3, p3), strcmp(p4, p0), strcmp(p3, p2));
 
+printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
+
 	printf("\n\n** STRDUP **\n\n");
 
     char dup0[] = "bonjour les amis.";
@@ -212,37 +214,35 @@ int		main(void)
 
 
 	printf("\n****** BONUS ******\n");
-    t_list  elem1;
-    t_list  elem2;
+    t_list  *beg_list = NULL;
+    ft_list_push_front(&beg_list, "Cyrille");
+        ft_list_push_front(&beg_list, "Maxime");
 
-    elem1.data = "Julia";
-    elem2.data = "Manon";
-    elem1.next = &elem2;
-    elem2.next = NULL;
-    t_list  *beg_list = &elem1;
-    //char    *str1 = "8ijkl5";
-    //char    *str2 = "8g";
-    char    *str_mal1 = (char *)malloc(3);
-    str_mal1[0] = '8';
-    str_mal1[1] = 'g';
-    str_mal1[2] = 0;
 
-    char    *str_mal2 = (char *)malloc(3);
-    str_mal2[0] = '8';
-    str_mal2[1] = 'g';
-    str_mal2[2] = 0;
+    printf("Before push: beg_list = %p\t->data = %s\t->next = %p|\n", beg_list, beg_list->data, beg_list->next);
+    ft_list_push_front(&beg_list, "Marc");
+    ft_list_push_front(&beg_list, "Manon");
+    ft_list_push_front(&beg_list, "Julia");
+    ft_list_push_front(&beg_list, "Therese");
+    ft_list_push_front(&beg_list, "Margaux");
+    t_list  *current = beg_list;
+    while (beg_list)
+    {
+        printf("elem at (%8p) ->data = %s\n", beg_list, beg_list->data);
+        printf("\t\t|_ next at (%p) ->data = %s\n",beg_list->next, (beg_list->next)? beg_list->next->data : "" );
+        beg_list = beg_list->next;
+    }
 
-    printf("Before push: |%s|%p|%p|\n", beg_list->data, beg_list, beg_list->next);
-    ft_list_push_front(&beg_list, str_mal1);
-    ft_list_push_front(&beg_list, str_mal2);
-
-    printf("Elem1: |%s|%p|\n", beg_list->data, beg_list->next);
-    printf("Elem2: |%s|%p|\n", beg_list->next->data, beg_list->next->next);
-    printf("Elem3: |%s|%p|\n", beg_list->next->next->data, beg_list->next->next->next);
-    printf("Elem4: |%s|%p|\n", beg_list->next->next->next->data, beg_list->next->next->next->next);
-
+    beg_list = current;
     printf("\n\nLIST SIZE\n\n");
     printf("List size: |%d|%d|%d|%d|\n", ft_list_size(beg_list), ft_list_size(beg_list->next), ft_list_size(beg_list->next->next), ft_list_size(NULL));
+    beg_list = current;
+    printf("***\n");
+    ft_print_list(&beg_list);
+    printf("\n");
+    printf("\n\nLIST SORT\n\n");
+    ft_list_sort(&beg_list, &ft_strcmp);
+    ft_print_list(&beg_list);
 
     return (0);
 }
