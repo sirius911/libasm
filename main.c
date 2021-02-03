@@ -215,16 +215,17 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
 
 	printf("\n****** BONUS ******\n");
     t_list  *beg_list = NULL;
+
     ft_list_push_front(&beg_list, "Cyrille");
         ft_list_push_front(&beg_list, "Maxime");
 
 
     printf("Before push: beg_list = %p\t->data = %s\t->next = %p|\n", beg_list, beg_list->data, beg_list->next);
-    ft_list_push_front(&beg_list, "Marc");
+/*    ft_list_push_front(&beg_list, "Marc");
     ft_list_push_front(&beg_list, "Manon");
     ft_list_push_front(&beg_list, "Julia");
     ft_list_push_front(&beg_list, "Therese");
-    ft_list_push_front(&beg_list, "Margaux");
+    ft_list_push_front(&beg_list, "Margaux");*/
     t_list  *current = beg_list;
     while (beg_list)
     {
@@ -243,6 +244,17 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     printf("\n\nLIST SORT\n\n");
     ft_list_sort(&beg_list, &ft_strcmp);
     ft_print_list(&beg_list);
+
+    t_list      *empty_list = NULL;
+    printf("empty_list = %d\n",ft_list_size(empty_list));
+    ft_list_sort(&empty_list, &ft_strcmp);
+    ft_print_list(&empty_list);
+    t_list      *one_list = NULL;
+    ft_list_push_front(&one_list, "Element One");
+    ft_print_list(&one_list);
+    printf("After sort :\n");
+    ft_list_sort(&one_list, &ft_strcmp);
+    ft_print_list(&one_list);
 
     return (0);
 }
