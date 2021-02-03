@@ -26,6 +26,11 @@ void		clear_buf(char *buf, int size)
 		buf[i++] = 0;
 }
 
+void    ft_myfree(void *ptr)
+{
+    free(ptr);
+}
+
 int		main(void)
 {
 	char p0[] = "abc";
@@ -221,11 +226,11 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
 
 
     printf("Before push: beg_list = %p\t->data = %s\t->next = %p|\n", beg_list, beg_list->data, beg_list->next);
-/*    ft_list_push_front(&beg_list, "Marc");
+    ft_list_push_front(&beg_list, "Marc");
     ft_list_push_front(&beg_list, "Manon");
     ft_list_push_front(&beg_list, "Julia");
     ft_list_push_front(&beg_list, "Therese");
-    ft_list_push_front(&beg_list, "Margaux");*/
+    ft_list_push_front(&beg_list, "Margaux");
     t_list  *current = beg_list;
     while (beg_list)
     {
@@ -255,6 +260,31 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     printf("After sort :\n");
     ft_list_sort(&one_list, &ft_strcmp);
     ft_print_list(&one_list);
+    printf("Befor ft_list_remove_if()\n");
+    ft_print_list(&beg_list);
+
+    ft_list_remove_if(&beg_list, "Margaux", &ft_strcmp, &ft_myfree);
+    printf("After ft_list_remove_if(Margaux)\n");
+    ft_print_list(&beg_list);
+    ft_list_remove_if(&beg_list, "Cyrille", &ft_strcmp, &ft_myfree);
+    printf("After ft_list_remove_if(Cyrille)\n");
+    ft_print_list(&beg_list);
+    ft_list_remove_if(&beg_list, "Therese", &ft_strcmp, &ft_myfree);
+    printf("After ft_list_remove_if(Therese)\n");
+    ft_print_list(&beg_list);
+    ft_list_remove_if(&beg_list, NULL, &ft_strcmp, &ft_myfree);
+    printf("After ft_list_remove_if(NULL)\n");
+    ft_print_list(&beg_list);
+
+    ft_list_remove_if(&one_list, "", &ft_strcmp, &ft_myfree);
+    ft_print_list(&one_list);
+    
+    ft_list_remove_if(&one_list, "Element One", &ft_strcmp, &ft_myfree);
+    ft_print_list(&one_list);
+    ft_list_remove_if(&beg_list, "Maxime", &ft_strcmp, &ft_myfree);
+    ft_list_remove_if(&beg_list, "Marc", &ft_strcmp, &ft_myfree);
+    ft_list_remove_if(&beg_list, "Manon", &ft_strcmp, &ft_myfree);
+    ft_list_remove_if(&beg_list, "Julia", &ft_strcmp, &ft_myfree);
 
     return (0);
 }

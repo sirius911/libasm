@@ -40,8 +40,8 @@ Fonctions autorisées : malloc
 - [ ] ft_atoi_base
 - [x] ft_list_push_front
 - [x] ft_list_size
-- [ ] ft_list_sort
-- [ ] ft_list_remove_if
+- [x] ft_list_sort
+- [x] ft_list_remove_if
 
 ---------------------------------
 
