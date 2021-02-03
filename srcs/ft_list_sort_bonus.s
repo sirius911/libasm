@@ -18,6 +18,10 @@
 ;
 ; **************************************************************************** #
 
+
+
+extern		ft_list_size
+
 section.data:
     %define ACTUEL_NODE r12
     %define FUNC r13
@@ -38,9 +42,13 @@ ft_list_sort:
     cmp rsi, 0
     je ret
 
-    mov BEGIN, rdi
-    ; *actuel_node = *begin
+    mov BEGIN, rdi								; *actuel_node = *begin
+    
     mov ACTUEL_NODE, [BEGIN]
+    mov 	rdi, ACTUEL_NODE
+    call 	ft_list_size
+    cmp 	rax, 1								; ft_list_size <=  1?
+    jle		ret 								; end
     ; *actuel_node->next = begin->next
     mov ACTUEL_NODE_next, [ACTUEL_NODE + 8]
     mov FUNC, rsi
