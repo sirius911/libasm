@@ -31,7 +31,7 @@ ft_list_push_front:
 					call	malloc				; call malloc
 					cmp		rax,		0		; return NULL ?
 					jz		_end				; yes -> _end
-					pop 	qword[rax]			; restore *data in rax[0-7]
+					pop 	qword[rax]			; restore *data in rax[0-8]
 					pop 	rdi					; restore **begin_list
 					mov		rdx,		[rdi]	; pointer begin_list->rdx
 					mov		[rax + 8],	rdx		; ->next = rdx [8-15]

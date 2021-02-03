@@ -49,26 +49,19 @@ ft_list_sort:
     call 	ft_list_size
     cmp 	rax, 1								; ft_list_size <=  1?
     jle		ret 								; end
-    ; *actuel_node->next = begin->next
-    mov ACTUEL_NODE_next, [ACTUEL_NODE + 8]
+    mov ACTUEL_NODE_next, [ACTUEL_NODE + 8]		; *actuel_node->next = begin->next
     mov FUNC, rsi
 
-;while (actuel_node->next != NULL)
-	while:
-			;if ((*cmp)(actuel_node->data, actuel_node->next->data) > 0)
+	while:								;while (actuel_node->next != NULL)
 			mov rdi, [ACTUEL_NODE]
 			mov rsi, [ACTUEL_NODE_next]
-			call FUNC
-			cmp	 al, 0
-			;	swap(actuel_node->data, actuel_node->next->data)
-			jns 	swap
-
-			;	actuel_node = *begin_list
-			;else
-			;	actuel_node = actuel_node->next
-			mov ACTUEL_NODE, ACTUEL_NODE_next
-			mov ACTUEL_NODE_next, [ACTUEL_NODE + 8]
-end_while:	cmp ACTUEL_NODE_next, 0
+			call	FUNC 				;if ((*cmp)(actuel_node->data, actuel_node->next->data) > 0)
+			cmp	al, 0
+			jns 	swap 				; swap(actuel_node->data, actuel_node->next->data)
+													;else
+			mov ACTUEL_NODE, ACTUEL_NODE_next  		
+			mov ACTUEL_NODE_next, [ACTUEL_NODE + 8] ;	actuel_node = actuel_node->next
+end_while:	cmp ACTUEL_NODE_next, 0		; while (actuel_node->next)
 			jz	ret
 			jmp	while
 
@@ -77,7 +70,7 @@ end_while:	cmp ACTUEL_NODE_next, 0
 			mov rsi, [ACTUEL_NODE_next]
 			mov [ACTUEL_NODE_next], rdi
 			mov [ACTUEL_NODE], rsi
-			mov ACTUEL_NODE, [BEGIN]
+			mov ACTUEL_NODE, [BEGIN]			;	actuel_node = *begin_list
 			mov ACTUEL_NODE_next, [ACTUEL_NODE + 8]
 			jmp end_while
 
