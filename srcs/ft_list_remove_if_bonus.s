@@ -13,7 +13,7 @@
 ; prototype : void	ft_list_remove_if(t_list **begin_list, void *data, int (*cmp)(), void (*free_f)(void *))
 ; input	:rdi = *begin_list rsi = *data rdx = *cmp rcx = *free_f
 ; output: r/a
-; used registers : 
+; used registers : r8 - r10, r12 - r15
 ;
 ; **************************************************************************** #
 
@@ -24,7 +24,7 @@ section.data:
 	%define ACTUEL_NODE	r12
 	%define FUNC_CMP	r13
 	%define BEGIN		r14
-	%define NODE_NEXT r15
+	%define NODE_NEXT 	r15
 	%define DATA		r8
 	%define FUNC_FREE	r9
 	%define FIRST_NODE	r10
