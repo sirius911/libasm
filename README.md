@@ -37,7 +37,7 @@ Fonctions autorisées : malloc
 `	struct s_list *next;`  
 `} t_list;`
 
-- [ ] ft_atoi_base
+- [x] ft_atoi_base
 - [x] ft_list_push_front
 - [x] ft_list_size
 - [x] ft_list_sort

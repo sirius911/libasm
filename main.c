@@ -286,5 +286,67 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     ft_list_remove_if(&beg_list, "Manon", &ft_strcmp, &ft_myfree);
     ft_list_remove_if(&beg_list, "Julia", &ft_strcmp, &ft_myfree);
 
+printf("\n\n** ATOI_BASE **\n\n");
+
+    char str0[] = "Enchat";
+
+    printf("Atoi_base: %d\n", ft_atoi_base("1", "0123456789"));
+    printf("Atoi_base: %d\n", ft_atoi_base("0", "0123456789"));
+    printf("Atoi_base: %d\n", ft_atoi_base("1000", "0123456789"));
+    printf("Atoi_base: %d\n", ft_atoi_base("1234", "0123456789"));
+    printf("Atoi_base: %d\n", ft_atoi_base("9876", "0123456789"));
+    printf("Atoi_base: %d\n", ft_atoi_base("8877", "0123456789"));
+
+    printf("\nAtoi_base: %d\n", ft_atoi_base("ff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("ffff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("ffffff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("7fffffff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("ffffffff", "0123456789abcdef"));
+
+    printf("\nAtoi_base: %d\n", ft_atoi_base("-ff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("-+-ffff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("---ffffff", "0123456789abcdef"));
+    printf("Atoi_base: %d\n", ft_atoi_base("ba", "abcdefghij"));
+    printf("Atoi_base: %d\n", ft_atoi_base("bcd", "abcdefghij"));
+
+    printf("\nExpected alternate -1/1\n\n");
+    printf("Str_checks: %d\n", ft_atoi_base("\n-a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("+a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("---a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("--a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("-+--a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("+--+a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("\n-a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("\n\f\r\t \n  \v+++a", "1a234"));
+    printf("Str_checks: %d\n", ft_atoi_base("-4\n", "1423"));
+
+    printf("\nCheck bad strs : expected 0\n");
+    printf("Str_check: %d\n", ft_atoi_base("\n ", "1423"));
+    printf("Str_checks: %d\n", ft_atoi_base("       \n", "1423"));
+    printf("\nExpected base errors = 0\n\n");
+
+    // printf("Base_checks: %d\n", ft_atoi_base(str0, "    afas.dfk     jhaelkgh12abc"));
+    // printf("Base_checks: %d\n", ft_atoi_base(str0, "12345678901"));
+    printf("Base_checks: %d\n", ft_atoi_base("", ""));
+    printf("Base_checks: %d\n", ft_atoi_base("1", "1"));
+    printf("Base_checks: %d\n", ft_atoi_base("1", "123 "));
+    printf("Base_checks: %d\n", ft_atoi_base("1", "     1"));
+    printf("Base_checks: %d\n", ft_atoi_base("1", "1  "));
+    printf("Base_checks: %d\n", ft_atoi_base("1", "2\n1"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "112"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "1232"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "000000000"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "121234+"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "12abcdefg-"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "12abc-+"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "12abc--"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "12abcdefw    +"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "12+abc"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "+++12abc"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "+-+12abc"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "+as.dfkjhaelkgh12abc"));
+    printf("Base_checks: %d\n", ft_atoi_base(str0, "-    afas.dfk     jhaelkgh12abc"));
+
+
     return (0);
 }
