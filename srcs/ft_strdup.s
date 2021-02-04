@@ -26,14 +26,20 @@ extern ft_strcpy
 	section		.text
 
 ft_strdup:
+			push	rbp
+			mov		rbp,		rsp
 			push	rdi					; save rdi (*s)
 			call	ft_strlen			; rax = ft_strlen(*s)
 			mov		rdi,		rax		; rdi = len(s*)
-			call	malloc				; malloc(rdi) -> rax
+			call	malloc wrt ..plt	; malloc(rdi) -> rax
 			cmp		rax,		0		; rax = 0 ?
 			je		_end				; yes => _end
 			mov		rdi, 		rax		; rax -> rdi
 			pop 	rsi 				; old rdi -> rsi
 			call 	ft_strcpy			; strcpy(rdi, rsi)->rax
-	_end:	ret
+
+	_end:	
+			mov		rsp,		rbp
+			pop 	rbp
+			ret
 				

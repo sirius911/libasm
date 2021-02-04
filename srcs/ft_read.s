@@ -24,16 +24,24 @@ extern __errno_location
 	section .text
 
 ft_read:
+		push	rbp
+		mov		rbp,	rsp
 		xor		rax,	rax			;rax = 0
 		syscall						;call read
 		cmp		rax,	0			; rax < 0 ?
 		jl		_err 				; yes => error
+		mov		rsp,	rbp
+		pop 	rbp
 		ret 						; ok
 
 	_err:
-		neg 	rax					; rax = -rax
-		mov		rdi,	rax			; save errno 
-		call	__errno_location	; return pointer to errno in rax
-		mov		[rax],	rdi			; Value of errno in rax address
-		mov		rax, -1				; return fail
+		push	rbx
+		mov		rbx,	rax			
+		call 	__errno_location wrt ..plt
+		neg		rbx
+		mov		[rax],	rbx
+		pop 	rbx
+		mov		rax,	-1
+		mov		rsp,	rbp
+		pop 	rbp
 		ret

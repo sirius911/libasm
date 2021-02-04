@@ -24,6 +24,8 @@ extern malloc
 	section		.text
 
 ft_list_push_front:
+					push	rbp
+					mov		rbp,	rsp					
 					xor		rax,		rax		; rax = 0
 					push 	rdi					; save **begin_list
 					push 	rsi 				; save *data
@@ -38,4 +40,6 @@ ft_list_push_front:
 					mov		[rdi], 		rax		; new data at begin_list
 
 		_end:	
+				mov		rsp,	rbp
+				pop 	rbp
 				ret
