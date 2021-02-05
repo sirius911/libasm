@@ -24,13 +24,12 @@ extern malloc
 	section		.text
 
 ft_list_push_front:
-					push	rbp
-					mov		rbp,	rsp					
+					push 	rsp				
 					xor		rax,		rax		; rax = 0
 					push 	rdi					; save **begin_list
 					push 	rsi 				; save *data
 					mov		rdi,		16		; size t_list
-					call	malloc				; call malloc
+					call	malloc wrt ..plt	; call malloc
 					cmp		rax,		0		; return NULL ?
 					jz		_end				; yes -> _end
 					pop 	qword[rax]			; restore *data in rax[0-8]
@@ -39,7 +38,6 @@ ft_list_push_front:
 					mov		[rax + 8],	rdx		; ->next = rdx [8-15]
 					mov		[rdi], 		rax		; new data at begin_list
 
-		_end:	
-				mov		rsp,	rbp
-				pop 	rbp
-				ret
+			_end:	
+					pop 	rsp
+					ret
