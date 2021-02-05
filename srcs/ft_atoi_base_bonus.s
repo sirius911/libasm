@@ -38,6 +38,8 @@ ft_atoi_base:
 				mov STR, 	rdi					; save str
 				mov BASE,	rsi 				; save base
 				xor r12,	r12 				; char = 0
+				cmp STR, 	0
+				je 			error
 				jmp			valid_base
 	_continue:
 				xor i,		i 					; i = 0
@@ -103,6 +105,8 @@ return_int:
 				ret
 
 valid_base:
+				cmp BASE,	0
+				je 		error
 				mov rdi,	BASE
 				call	ft_strlen
 				mov LEN,	rax
