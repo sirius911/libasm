@@ -17,6 +17,43 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+static void        ft_print_list(t_list **beg_list)
+{
+    t_list  *list;
+    int     i;
+    int     j;
+
+    list = *beg_list;
+    i = 0;
+    if (!list)
+        printf("Empty list\n");
+    else
+    {
+
+        while (list)
+        {
+            j = 1;
+            while (j <= i)
+            {
+                printf("\t");
+                j++;
+            }
+            if (i > 0)
+                printf("|_ ");
+            printf("%s\n", list->data);
+            list = list->next;
+            i++;
+        }
+        j = 1;
+        while (j <= i)
+        {
+            printf("\t");
+            j++;
+        }  
+        printf("|_ %s\n", NULL);     
+    }
+}
+
 void		clear_buf(char *buf, int size)
 {
 	int 	i;
@@ -45,12 +82,12 @@ int		main(void)
     clear_buf(buff, i);
 
 
-    printf("### STRLEN ###\n\n");
+    printf("##################### STRLEN #####################\n\n");
 
     printf("My res: |%lu|%lu|%lu|%lu|%lu|\n", ft_strlen(p0), ft_strlen(p1), ft_strlen(p3), ft_strlen("1"), ft_strlen(""));
     printf("Lib C : |%lu|%lu|%lu|%lu|%lu|\n", strlen(p0), strlen(p1), strlen(p3), strlen("1"), strlen(""));
 
-    printf("\n\n### STRCPY ###\n\n");
+    printf("\n\n##################### STRCPY #####################\n\n");
 
     printf("My res: (%s, %s) |%s|\n", buff, p0, ft_strcpy(buff, p0));
     printf("Lib C : (%s, %s) |%s|\n", buff, p0, strcpy(buff, p0));
@@ -63,14 +100,14 @@ int		main(void)
     printf("My res: (%s, %s) |%s|\n", p2, p2 + 3, ft_strcpy(p2, p2 + 3));
 	printf("Lib C : (%s, %s) |%s|\n", p5, p5 + 3, strcpy(p5, p5 + 3));
 
-	printf("\n\n### STRCMP ###\n\n");
+	printf("\n\n##################### STRCMP #####################\n\n");
 
     printf("My res: |%d|%d|%d|%d|%d|%d|%d|\n", ft_strcmp(p0, p1), ft_strcmp(p0, p0), ft_strcmp(p1, p0), ft_strcmp(p0, p3), ft_strcmp(p3, p3), ft_strcmp(p4, p0), ft_strcmp(p3, p2));
     printf("Lib C : |%d|%d|%d|%d|%d|%d|%d|\n", strcmp(p0, p1), strcmp(p0, p0), strcmp(p1, p0), strcmp(p0, p3), strcmp(p3, p3), strcmp(p4, p0), strcmp(p3, p2));
 
-printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
 
-	printf("\n\n** STRDUP **\n\n");
+
+	printf("\n\n##################### STRDUP #####################\n\n");
 
     char dup0[] = "bonjour les amis.";
     char dup1[] = "Le langage assembleur, souvent appellé asm, est un langage de bas niveau pour ordinateur - ou autre machine programmable - qui possède une très forte correspondance\nentre le langage et l’architecture de la machine.\n";
@@ -84,16 +121,19 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     printf("My dup: %s\n", s);
     free(s);
     s = ft_strdup(dup2);
-    printf("My dup: %s\n", s);
+    printf("My dup ft_strdup('Bla bla \\0bla... \\n vous nous fatiguez'): %s\n", s);
     free(s);
     s = strdup(dup2);
-    printf("Lib C : %s\n", s);
+    printf("Lib C  ft_strdup('Bla bla \\0bla... \\n vous nous fatiguez'): %s\n", s);
     free(s);
     s = ft_strdup(dup3);
-    printf("My dup: <%s>\n", s);
+    printf("My dup: ft_strdup('')<%s>\n", s);
+    free(s);
+    s = strdup(dup3);
+    printf("Lib C : ft_strdup('')<%s>\n", s);
     free(s);
 
-    printf("\n\n### READ ###\n\n");
+    printf("\n\n##################### READ #####################\n\n");
 
     clear_buf(buff, i);
     int fd1 = open("test.txt", O_RDWR);
@@ -117,36 +157,36 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     close(fd1);
 
     fd1 = open("read_test.txt", O_RDWR);
-    printf("Lib C: |%zd|\n", read(fd1, buff, 10));
-    printf("Lib C: |%s|\n", buff);
+    printf("Lib C:   |%zd|\n", read(fd1, buff, 10));
+    printf("Lib C:   |%s|\n", buff);
     clear_buf(buff, i);
-    printf("Lib C: |%zd|\n", read(fd1, buff, 20));
-    printf("Lib C: |%s|\n", buff);
+    printf("Lib C:   |%zd|\n", read(fd1, buff, 20));
+    printf("Lib C:   |%s|\n", buff);
     clear_buf(buff, i);
-    printf("Lib C: |%zd|\n", read(fd1, buff, 30));
-    printf("Lib C: |%s|\n", buff);
+    printf("Lib C:   |%zd|\n", read(fd1, buff, 30));
+    printf("Lib C:   |%s|\n", buff);
     clear_buf(buff, i);
-    printf("Lib C: |%zd|\n", read(fd1, buff, 40));
-    printf("Lib C: |%s|\n", buff);
+    printf("Lib C:   |%zd|\n", read(fd1, buff, 40));
+    printf("Lib C:   |%s|\n", buff);
     clear_buf(buff, i);
-    printf("Lib C: |%zd|\n", read(fd1, buff, 50));
-    printf("Lib C: |%s|\n", buff);
+    printf("Lib C:   |%zd|\n", read(fd1, buff, 50));
+    printf("Lib C:   |%s|\n", buff);
     clear_buf(buff, i);
-    printf("Lib C: |%zd|\n", read(fd1, buff, 0));
-    printf("Lib C: |%s|\n", buff);
+    printf("Lib C:   |%zd|\n", read(fd1, buff, 0));
+    printf("Lib C:   |%s|\n", buff);
     close(fd1);
 
 
-    printf("\n** READ STDIN **\n\n");
+    printf("\n##################### READ STDIN #####################\n\n");
 
     clear_buf(buff, i);
-    printf("My read: %zd\n", ft_read(0, buff, 10));
+    printf("My read: %zd\n", ft_read(0, buff, 100));
     printf("My read: %s\n", buff);
     clear_buf(buff, i);
-    printf("C read : %zd\n", read(0, buff, 10));
+    printf("C read : %zd\n", read(0, buff, 100));
     printf("C read : %s\n", buff);
 
-    printf("\n** READ ERROR **\n\n");
+    printf("\n##################### READ ERROR #####################\n\n");
     clear_buf(buff, i);
     fd1 = open("test.txt", O_RDWR);
     printf("My read: |%zd|\n", ft_read(-5, buff, 10));
@@ -178,7 +218,7 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     perror("read(fd1, NULL, 10) => Error in read:");
     close(fd1);
 
-    printf("\n\n### WRITE ###\n\n");
+    printf("\n\n##################### WRITE #####################\n\n");
 
     printf("My write: |%zd|\n", ft_write(1, "Oh chilele\n", 11));
     printf("My write: |%zd|\n", ft_write(1, "\n", 2));
@@ -196,7 +236,7 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     printf("Unistd: |%zd|\n", write(1, "test", 2));
     printf("Unistd: |%zd|\n", write(1, NULL, 2));
 
-    printf("\n** WRITE ERROR **\n\n");
+    printf("\n##################### WRITE ERROR #####################\n\n");
     printf("My res: |%zd|\n", ft_write(1, NULL, 2));
     printf("Errno: %d\n", errno);
     perror("Error in read:");
@@ -217,80 +257,97 @@ printf("Cyrille - Maxime = %d\n", ft_strcmp("Cyrille", "Maxime"));
     printf("Errno: %d\n", errno);
     perror("Error in read:");
 
-
-	printf("\n****** BONUS ******\n");
+	printf("\n\noOoOoOoOoOoOoOoOoOoOoOo BONUS oOoOoOoOoOoOoOoOoOoOoOo\n");
+    printf("\n##################### ft_list_push_front() #####################\n");
     t_list  *beg_list = NULL;
 
     ft_list_push_front(&beg_list, "Cyrille");
-        ft_list_push_front(&beg_list, "Maxime");
+    ft_list_push_front(&beg_list, "Maxime");
 
 
-    printf("Before push: beg_list = %p\t->data = %s\t->next = %p|\n", beg_list, beg_list->data, beg_list->next);
+    printf("\033[32mBefore push:\033[0mv \n");
+    ft_print_list(&beg_list);
     ft_list_push_front(&beg_list, "Marc");
     ft_list_push_front(&beg_list, "Manon");
     ft_list_push_front(&beg_list, "Julia");
     ft_list_push_front(&beg_list, "Therese");
     ft_list_push_front(&beg_list, "Margaux");
-    t_list  *current = beg_list;
-    while (beg_list)
-    {
-        printf("elem at (%8p) ->data = %s\n", beg_list, beg_list->data);
-        printf("\t\t|_ next at (%p) ->data = %s\n",beg_list->next, (beg_list->next)? beg_list->next->data : "" );
-        beg_list = beg_list->next;
-    }
-
-    beg_list = current;
-    printf("\n\nLIST SIZE\n\n");
-    printf("List size: |%d|%d|%d|%d|\n", ft_list_size(beg_list), ft_list_size(beg_list->next), ft_list_size(beg_list->next->next), ft_list_size(NULL));
-    beg_list = current;
-    printf("***\n");
+    printf("\033[32mAfter push\033[0m\n");
     ft_print_list(&beg_list);
-    printf("\n");
-    printf("\n\nLIST SORT\n\n");
+
+    printf("\n##################### ft_list_size() #####################\n");
+    printf("List size: |%d|%d|%d|%d|\n", ft_list_size(beg_list), ft_list_size(beg_list->next), ft_list_size(beg_list->next->next), ft_list_size(NULL));
+
+
+    printf("\n##################### ft_list_sort() #####################\n");
     ft_list_sort(&beg_list, &ft_strcmp);
     ft_print_list(&beg_list);
 
-    t_list      *empty_list = NULL;
-    printf("empty_list = %d\n",ft_list_size(empty_list));
-    ft_list_sort(&empty_list, &ft_strcmp);
-    ft_print_list(&empty_list);
+
+    printf("\t\033[32mempty_list\033[0m\nft_list_size(NULL) = %d\n",ft_list_size(NULL));
+    printf("\tft_list_sort(NULL) >>>");
+    ft_list_sort(NULL, &ft_strcmp);
+    printf(" ok\n");
+
     t_list      *one_list = NULL;
     ft_list_push_front(&one_list, "Element One");
     ft_print_list(&one_list);
-    printf("After sort :\n");
+    printf("\n\t\033[32mAfter sort a list with One Element:\033[0m\n");
     ft_list_sort(&one_list, &ft_strcmp);
     ft_print_list(&one_list);
-    printf("Befor ft_list_remove_if()\n");
+
+    printf("\n\t\033[32mft_list_sort(&list, NULL) : \033[0m");
+    ft_list_sort(&beg_list, NULL);
+    printf("ok\n");
+
+    printf("\n");
+    t_list *tripl_list = NULL;
+    ft_list_push_front(&tripl_list, "milk");
+    ft_list_push_front(&tripl_list, "milk");
+    ft_list_push_front(&tripl_list, "milk");
+    printf("\t\033[32mSorting with multiple elements :\n\tBefore\033[0m\n");
+    ft_print_list(&tripl_list);
+    ft_list_sort(&tripl_list, &ft_strcmp);
+    printf("\t\033[32mAfter\033[0m\n");
+    ft_print_list(&tripl_list);
+    printf("\n\n##################### ft_list_remove_if() #####################\n");
+    printf("\n\033[32mBefor ft_list_remove_if()\033[0m\n");
     ft_print_list(&beg_list);
 
     ft_list_remove_if(&beg_list, "Margaux", &ft_strcmp, &ft_myfree);
-    printf("After ft_list_remove_if(Margaux)\n");
+    printf("\t\033[32mAfter ft_list_remove_if(Margaux)\033[0m\n");
     ft_print_list(&beg_list);
     ft_list_remove_if(&beg_list, "Cyrille", &ft_strcmp, &ft_myfree);
-    printf("After ft_list_remove_if(Cyrille)\n");
+    printf("\t\033[32mAfter ft_list_remove_if(Cyrille)\033[0m\n");
     ft_print_list(&beg_list);
     ft_list_remove_if(&beg_list, "Therese", &ft_strcmp, &ft_myfree);
-    printf("After ft_list_remove_if(Therese)\n");
+    printf("\t\033[32mAfter ft_list_remove_if(Therese)\033[0m\n");
     ft_print_list(&beg_list);
     ft_list_remove_if(&beg_list, NULL, &ft_strcmp, &ft_myfree);
-    printf("After ft_list_remove_if(NULL)\n");
+    printf("\t\033[32mAfter ft_list_remove_if(NULL)\033[0m\n");
     ft_print_list(&beg_list);
 
+    printf("\t\033[32mList with only one Element\033[0m\n");
     ft_list_remove_if(&one_list, "", &ft_strcmp, &ft_myfree);
     ft_print_list(&one_list);
     
     ft_list_remove_if(&one_list, "Element One", &ft_strcmp, &ft_myfree);
+    printf("\t-> \n");
     ft_print_list(&one_list);
-    ft_list_remove_if(&beg_list, "Maxime", &ft_strcmp, &ft_myfree);
-    ft_list_remove_if(&beg_list, "Marc", &ft_strcmp, &ft_myfree);
-    ft_list_remove_if(&beg_list, "Manon", &ft_strcmp, &ft_myfree);
-    ft_list_remove_if(&beg_list, "Julia", &ft_strcmp, &ft_myfree);
 
-printf("\n\n** ATOI_BASE **\n\n");
+
+    printf("\n\t\033[32mtest multiple : \n\tBefor\033[0m\n");
+    ft_print_list(&tripl_list);
+    ft_list_remove_if(&tripl_list, "milk", &ft_strcmp, &ft_myfree);
+    printf("\t\033[32mAfter\033[0m\n");
+    ft_print_list(&tripl_list);
+
+
+printf("\n\n##################### ATOI_BASE #####################\n\n");
 
     char str0[] = "Enchat";
 
-    printf("Atoi_base: %d\n", ft_atoi_base("1", "0123456789"));
+    printf("ft_atoi_base(\"1\", \"0123456789\") = %d\n", ft_atoi_base("1", "0123456789"));
     printf("Atoi_base: %d\n", ft_atoi_base("0", "0123456789"));
     printf("Atoi_base: %d\n", ft_atoi_base("1000", "0123456789"));
     printf("Atoi_base: %d\n", ft_atoi_base("1234", "0123456789"));
@@ -347,6 +404,11 @@ printf("\n\n** ATOI_BASE **\n\n");
     printf("Base_checks: %d\n", ft_atoi_base(str0, "+as.dfkjhaelkgh12abc"));
     printf("Base_checks: %d\n", ft_atoi_base(str0, "-    afas.dfk     jhaelkgh12abc"));
 
+    printf("ft_atoi_base(NULL,'0123456789') = %d\n", ft_atoi_base(NULL,"0123456789"));
+    char    *max = "\399";
+    printf("ft_atoi_base(\\501,NULL) = %d\n", ft_atoi_base(max,NULL));
+
+printf("\n##################### END #####################\n");
 
     return (0);
 }
