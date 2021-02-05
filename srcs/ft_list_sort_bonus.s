@@ -32,14 +32,16 @@ section.text:
     global ft_list_sort
 
 ft_list_sort:
+    push rbp                                ; prologue
+    mov  rbp, rsp
     push r12
     push r13
     push r14
     push r15
 
-    cmp rdi, 0
-    je ret
-    cmp rsi, 0
+    cmp rdi, 0                              ; if begin_list == Null
+    je ret                                  ; or (*cmp) == Null
+    cmp rsi, 0                              ; => end
     je ret
 
     mov BEGIN, rdi								; *actuel_node = *begin
@@ -57,7 +59,7 @@ ft_list_sort:
 			mov rsi, [ACTUEL_NODE_next]
 			call	FUNC 				;if ((*cmp)(actuel_node->data, actuel_node->next->data) > 0)
 			cmp	al, 0
-			jns 	swap 				; swap(actuel_node->data, actuel_node->next->data)
+			jg 	swap 				; swap(actuel_node->data, actuel_node->next->data)
 													;else
 			mov ACTUEL_NODE, ACTUEL_NODE_next  		
 			mov ACTUEL_NODE_next, [ACTUEL_NODE + 8] ;	actuel_node = actuel_node->next
@@ -79,74 +81,5 @@ ret:
     pop r14
     pop r13
     pop r12
+    leave       ;epilogue
     ret
-
-
-
-
-
-
-
-
-
-# ft_list_sort:
-# 				push	rbx						; save rbx
-# 				push	r12						; save r12
-# 				cmp		rdi,		0			; begin == NULL ?
-# 				jz		_end
-# 				mov		r12,		[rdi]		; r12 = *begin
-
-# 				cmp		rsi,		0			; cmp == NULL ?
-# 				jz		_return
-
-# 	_main:
-# 				cmp		qword [rdi], 0			; *begin == NULL ?
-# 				jz		_return
-# 				mov		rcx,		[rdi]
-# 				mov		rbx,		[rcx + 8]	; current = *begin->next
-# 				cmp		rbx,		0			; current == NULL?
-# 				jz		_next
-				
-# 	_cmp:		push	rdi						; save rdi
-# 				push	rsi						; save rsi
-# 				mov		rax,		rsi
-# 				mov		rcx,		[rdi]
-# 				mov		rdi,		[rcx]		; rdi = (*begin)->data
-# 				mov		rsi,		[rbx]		; rsi = current->data
-# 				call	rax						; (*cmp)(rdi,rsi)
-# 				pop		rsi 					; restore rsi
-# 				pop		rdi						; restore rdi
-# 				cmp		rax,		0			; cmp > 0 ?
-# 				jg		_swap					; yes => swap
-
-# 				mov		rcx, 		[rbx + 8]	; no => next
-# 				mov		rbx,		rcx			; current = current.next
-
-# 				cmp		rbx,		0
-# 				jz		_next
-# 				jmp		_cmp
-
-
-# 	_next:		mov		rcx,		[rdi]		; |
-# 				mov		rbx,		[rcx + 8]	; | *begin = (*begin)->next
-# 				mov		[rdi],		rbx			; |
-# 				jmp		_main
-
-# 	_swap:		
-# 				mov		r8,			[rdi]
-# 				mov		rcx,		[r8]		; rcx = (*begin)->data
-# 				mov		rax,		[rbx]		; rax = current->data
-# 				mov		[r8],		rax			; *begin->data = current->data
-# 				mov		[rbx],		rcx			; current->data = *begin->data
-# 				mov		rcx,		[rbx + 8]
-# 				mov		rbx,		rcx			; current= current.next
-# 				cmp		rbx,		0
-# 				jz		_next
-# 				jmp 	_cmp
-
-# _return:		mov		[rdi],		r12			;a enlever si on inverse le debut
-
-# _end:	
-# 				pop 	r12
-# 				pop		rbx
-# 				ret
