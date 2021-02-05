@@ -109,7 +109,7 @@ int		main(void)
 
 	printf("\n\n##################### STRDUP #####################\n\n");
 
-    char dup0[] = "bonjour les amis.";
+    char dup0[] = "Bonjour les amis.";
     char dup1[] = "Le langage assembleur, souvent appellé asm, est un langage de bas niveau pour ordinateur - ou autre machine programmable - qui possède une très forte correspondance\nentre le langage et l’architecture de la machine.\n";
     char dup2[] = "Bla bla \0bla... \n vous nous fatiguez";
     char dup3[] = "";
