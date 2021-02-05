@@ -33,6 +33,8 @@ section.text:
 	global ft_list_remove_if
 
 ft_list_remove_if:
+			push	rbp
+			mov		rbp,		rsp
 			push	r12
 			push	r13
 			push	r14
@@ -42,7 +44,7 @@ ft_list_remove_if:
 	_main:
 			mov rdi, [ACTUEL_NODE]
 			mov rsi, DATA
-			call FUNC_CMP						;  cmp(actuel->data,data)
+			call FUNC_CMP						; cmp(actuel->data,data)
 			cmp rax, 0							; egal ?
 			jnz	_next							; no => next
 			mov NODE_NEXT, [ACTUEL_NODE + 8]
@@ -63,9 +65,9 @@ ft_list_remove_if:
 			call FUNC_FREE						; free_f(actuel)
 			mov [BEGIN], NODE_NEXT				; begin = actuel->next
 			mov ACTUEL_NODE, NODE_NEXT			; actuel=actuel->next
-			cmp NODE_NEXT, 0					; if !actuel => end
+			cmp ACTUEL_NODE, 0					; if !actuel => end
 			jz 	ret
-			jmp	_next
+			jmp	_main
 
 	_valid_input:
 			cmp	rdi, 0
@@ -94,4 +96,6 @@ ft_list_remove_if:
 			pop	r14
 			pop	r13
 			pop	r12
+			mov		rsp,		rbp
+			pop 	rbp
 			ret	
