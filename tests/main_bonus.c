@@ -96,7 +96,7 @@ int		main(void)
     printf("ft_strlen('%s') = %lu \t<=>\tstrlen('%s') = %lu\t\t\t->%s\n","",ft_strlen(""),"",strlen(""),(ft_strlen("") == strlen(""))? OK:KO);
 
     clear_buf(large,10000);
-    while (j <= 9999)
+    while (j < 9999)
         large[j++] = 'c';
 
     printf("ft_strlen(LARGE) = %lu <=>\tstrlen(LARGE) = %lu\t\t->%s\n",ft_strlen(large),strlen(large),(ft_strlen(large) == strlen(large))? OK:KO);
