@@ -2,6 +2,8 @@ Libasm
 ========
 L'objectif de ce projet est de devenir familier avec le language assembleur.
 
+[![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/clorin/libasm)](https://github.com/JaeSeoKim/badge42)
+
 # Intro
 Le langage assembleur, souvent appellé asm, est un langage de bas niveau pour or-
 dinateur - ou autre machine programmable - qui possède une très forte correspondance
